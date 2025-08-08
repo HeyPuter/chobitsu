@@ -19,6 +19,25 @@ import * as resources from '../lib/resources'
 import Protocol from 'devtools-protocol'
 import Page = Protocol.Page
 
+export function getFrameTree(): Page.GetFrameTreeResponse {
+  return {
+    frameTree: {
+      frame: {
+        id: MAIN_FRAME_ID,
+        mimeType: 'text/html',
+        securityOrigin: getOrigin(),
+        url: getUrl(),
+        loaderId: '0',
+        domainAndRegistry: getOrigin(),
+        secureContextType: 'Secure',
+        crossOriginIsolatedContextType: 'NotIsolated',
+        gatedAPIFeatures: [],
+      },
+      childFrames: [],
+    }
+  }
+}
+
 let proxy = ''
 
 export function setProxy(params: any) {
