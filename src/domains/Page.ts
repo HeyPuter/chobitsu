@@ -38,6 +38,17 @@ export function getFrameTree(): Page.GetFrameTreeResponse {
   }
 }
 
+export function setLifecycleEventsEnabled(params: Page.SetLifecycleEventsEnabledRequest) {
+  return {}
+}
+
+export function addScriptToEvaluateOnNewDocument(params: Page.AddScriptToEvaluateOnNewDocumentRequest): Page.AddScriptToEvaluateOnNewDocumentResponse{
+  console.log(params);
+  return {
+    identifier: '1', // This should be a unique identifier for the script
+  }
+}
+
 let proxy = ''
 
 export function setProxy(params: any) {
