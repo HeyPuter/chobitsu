@@ -41,8 +41,16 @@ export async function callFunctionOn(
     ctx = objManager.getObj(objectId)
   }
 
+  let object = await callFn(functionDeclaration, args, ctx);
+  let result = objManager.wrap(object, {
+    generatePreview: true,
+  });
+  if (params.returnByValue) {
+    result.value  = structuredClone(object);
+  }
+
   return {
-    result: objManager.wrap(await callFn(functionDeclaration, args, ctx)),
+    result,
   }
 }
 
