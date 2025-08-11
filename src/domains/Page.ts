@@ -18,7 +18,6 @@ import html2canvas, { Options as html2canvasOptions } from 'html2canvas'
 import * as resources from '../lib/resources'
 import Protocol from 'devtools-protocol'
 import Page = Protocol.Page
-import { trigger } from 'licia'
 
 
 declare var $chobitsuPageId: string;
