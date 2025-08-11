@@ -56,6 +56,8 @@ export async function callFunctionOn(
 
 let isEnable = false
 
+
+declare var $chobitsuPageId: string;
 export function enable() {
   isEnable = true
   each(triggers, trigger => trigger())
@@ -63,6 +65,11 @@ export function enable() {
 
   trigger('Runtime.executionContextCreated', {
     context: executionContext,
+    auxData: {
+      isDefault: true,
+      type: 'default',
+      frameId: $chobitsuPageId,
+    },
   })
 }
 

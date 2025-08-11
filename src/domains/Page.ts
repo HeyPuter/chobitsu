@@ -18,9 +18,10 @@ import html2canvas, { Options as html2canvasOptions } from 'html2canvas'
 import * as resources from '../lib/resources'
 import Protocol from 'devtools-protocol'
 import Page = Protocol.Page
+import { trigger } from 'licia'
+
 
 declare var $chobitsuPageId: string;
-
 export function getFrameTree(): Page.GetFrameTreeResponse {
   return {
     frameTree: {
@@ -41,6 +42,20 @@ export function getFrameTree(): Page.GetFrameTreeResponse {
 }
 export function createIsolatedWorld(params: Page.CreateIsolatedWorldRequest): Page.CreateIsolatedWorldResponse {
   console.log(params);
+
+  // fake context
+  connector.trigger('Runtime.executionContextCreated', {
+    context: {
+      id: 2,
+      origin: getOrigin(),
+      name: params.worldName,
+      auxData: {
+        isDefault: false,
+        type: 'isolated',
+        frameId: params.frameId,
+      },
+    },
+  })
   return {
     executionContextId: 1, // This should be a unique identifier for the execution context
   }
