@@ -19,15 +19,17 @@ import * as resources from '../lib/resources'
 import Protocol from 'devtools-protocol'
 import Page = Protocol.Page
 
+declare var $chobitsuPageId: string;
+
 export function getFrameTree(): Page.GetFrameTreeResponse {
   return {
     frameTree: {
       frame: {
-        id: MAIN_FRAME_ID,
+        id: $chobitsuPageId,
         mimeType: 'text/html',
         securityOrigin: getOrigin(),
         url: getUrl(),
-        loaderId: '0',
+        loaderId: $chobitsuPageId,
         domainAndRegistry: getOrigin(),
         secureContextType: 'Secure',
         crossOriginIsolatedContextType: 'NotIsolated',
@@ -35,6 +37,12 @@ export function getFrameTree(): Page.GetFrameTreeResponse {
       },
       childFrames: [],
     }
+  }
+}
+export function createIsolatedWorld(params: Page.CreateIsolatedWorldRequest): Page.CreateIsolatedWorldResponse {
+  console.log(params);
+  return {
+    executionContextId: 1, // This should be a unique identifier for the execution context
   }
 }
 
